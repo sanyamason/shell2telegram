@@ -11,7 +11,7 @@ ENV CGO_ENABLED=0
 RUN go build -v -trimpath -ldflags="-w -s -X 'main.version=$(git describe --abbrev=0 --tags | sed s/v//)'" -o /go/bin/shell2telegram .
 
 # final image
-FROM alpine
+FROM alpine:3.15
 
 RUN apk add --no-cache ca-certificates
 COPY --from=go_builder /go/bin/shell2telegram /app/shell2telegram
